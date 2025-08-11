@@ -1,9 +1,8 @@
 name: uj_ui
 description: "Umbijani UI Component package."
 repository: https://github.com/mwangaben/uj_ui
-issue_tracker: https://github.com/mwangaben/uj_ui/issues
+issue_tracker: https://github.com/zoeglbrt/hux/issues
 version: 0.0.1
-homepage:
 
 environment:
   sdk: ^3.6.1

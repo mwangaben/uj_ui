@@ -2,6 +2,10 @@
 
 A modern Flutter UI package with beautiful, customizable components designed for clean and consistent user interfaces.
 
+[![pub package](https://img.shields.io/pub/v/uj_ui.svg)](https://img.shields.io/pub/v/uj_ui)
+[![Platform](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20web%20%7C%20windows%20%7C%20macos%20%7C%20linux-blue)](https://flutter.dev/)
+[![Flutter support](https://img.shields.io/badge/Flutter-1.17%2B-blue)](https://flutter.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 

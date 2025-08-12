@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:searchfield/searchfield.dart';
-import 'package:uj_ui/src/widgets/uj_search_field.dart';
+import 'package:uj_ui/uj_ui.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +20,7 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
   TextEditingController searchController = TextEditingController();
-  TextEditingController
+  TextEditingController firstNmaeController = TextEditingController();
 
   List<Country> suggestions = [
     Country(name: 'Tanzania', code: 'Tz'),
@@ -37,6 +37,7 @@ class MyHomePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
+          spacing: 20,
           children: [
             UJSearchField(
                 controller: searchController,
@@ -49,10 +50,18 @@ class MyHomePage extends StatelessWidget {
                   focus.unfocus();
                   searchController.text = country.item!.name.toUpperCase();
                 },
-
-
-                hint: 'Country',
-  ),
+              hint: 'Country',
+              focusNode: focus,
+            ),
+            UJTextField(
+              controller: firstNmaeController,
+              hintText: 'First Name',
+              obscureText: false,
+            ),
+            UJButton(
+              text: 'Save',
+              onTap: () => print('Saved'),
+            ),
           ],
         ),
       ),

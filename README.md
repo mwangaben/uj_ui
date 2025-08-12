@@ -12,11 +12,6 @@ A modern Flutter UI package with beautiful, customizable components designed for
 
 ### Buttons
 - `UJButton` - Customizable button
-- Loading states and icon support
-
-![HuxButton Variants](screenshots/hux-buttons.png)
-
-
 
 
 ### Inputs
@@ -24,12 +19,6 @@ A modern Flutter UI package with beautiful, customizable components designed for
 
 
 - `UJSearchField` - Interactive Search with custom styling and labels
-
-
-
-### Widgets
-- `HuxLoading` - Customizable loading indicators
-- `HuxLoadingOverlay` - Full-screen loading overlay
 
 
 ## Installation
@@ -47,6 +36,7 @@ Wrap your app with the Hux theme:
 
 ```dart
 import 'package:flutter/material.dart';
+import 'package:searchfield/searchfield.dart';
 import 'package:uj_ui/uj_ui.dart';
 
 void main() {
@@ -58,12 +48,74 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'UJ UI Demo',
-      theme: HuxTheme.lightTheme,
-      darkTheme: HuxTheme.darkTheme,
       home: MyHomePage(),
     );
   }
 }
+
+class MyHomePage extends StatelessWidget {
+  MyHomePage({super.key});
+
+  TextEditingController searchController = TextEditingController();
+  TextEditingController firstNmaeController = TextEditingController();
+
+  List<Country> suggestions = [
+    Country(name: 'Tanzania', code: 'Tz'),
+    Country(name: 'Uganda', code: 'Ug'),
+    Country(name: 'Kenya', code: 'KE'),
+  ];
+
+
+  final focus = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          spacing: 20,
+          children: [
+            UJSearchField(
+                controller: searchController,
+                borderRadius: 12,
+                suggestions: suggestions
+                    .map((country) =>
+                        SearchFieldListItem(country.name, item: country))
+                    .toList(),
+                onSuggestionTap: (SearchFieldListItem<Country> country){
+                  focus.unfocus();
+                  searchController.text = country.item!.name.toUpperCase();
+                },
+              hint: 'Country',
+              focusNode: focus,
+            ),
+            UJTextField(
+              controller: firstNmaeController,
+              hintText: 'First Name',
+              obscureText: false,
+            ),
+            UJButton(
+              text: 'Save',
+              onTap: () => print('Saved'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Country {
+  final String name;
+  final String code;
+
+  const Country({
+    required this.name,
+    required this.code,
+  });
+}
+
 ```
 
 ### Using Components
@@ -72,11 +124,8 @@ class MyApp extends StatelessWidget {
 
 ```dart
 UJButton(
-  onPressed: () => print('Button pressed'),
-  child: Text('Primary Button'),
-  variant: HuxButtonVariant.primary,
-  size: HuxButtonSize.medium,
-  icon: Icons.star,
+  text: 'Save',
+  onTap: () => print('Saved'),
 )
 ```
 
@@ -84,18 +133,31 @@ UJButton(
 
 ```dart
 UJTextField(
-  label: 'Email',
-  hint: 'Enter your email',
-  prefixIcon: Icon(Icons.email),
-  onChanged: (value) => print(value),
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter your email';
-    }
-    return null;
-  },
+  controller: firstNmaeController,
+  hintText: 'First Name',
+  obscureText: false,
 )
 ```
+
+#### Search Field
+
+```dart
+UJSearchField(
+   controller: searchController,
+   borderRadius: 12,
+   suggestions: suggestions
+    .map((country) =>
+   SearchFieldListItem(country.name, item: country))
+    .toList(),
+   onSuggestionTap: (SearchFieldListItem<Country> country){
+   focus.unfocus();
+   searchController.text = country.item!.name.toUpperCase();
+ },
+ hint: 'Country',
+ focusNode: focus,
+)
+```
+
 
 ## License
 

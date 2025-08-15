@@ -13,6 +13,8 @@ class UJTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
+  final double? maxWidth;
+  final double? maxHeight;
 
   const UJTextField({
     super.key,
@@ -27,6 +29,8 @@ class UJTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.inputFormatters,
+    this.maxWidth = 300,
+    this.maxHeight = 40,
   });
 
   @override
@@ -60,6 +64,8 @@ class UJTextField extends StatelessWidget {
           BorderSide(color: Theme.of(context).colorScheme.onSurfaceVariant),
           borderRadius: BorderRadius.circular(radius),
         ),
+
+       constraints: BoxConstraints(maxWidth: maxWidth!, maxHeight: maxHeight!),
 
 // border on selected
         focusedBorder: OutlineInputBorder(
